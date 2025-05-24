@@ -1,14 +1,139 @@
+/* Neon tech‑bike theme inspired by reference image */
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap');
+
+:root {
+  --neon-pink: #ff2de8;
+  --neon-cyan: #00e5ff;
+  --bg-dark: #0e0e16;
+  --text-light: #e6f7ff;
+  --font-main: 'Orbitron', 'Segoe UI', Roboto, sans-serif;
+}
+
+html,body {
+  height: 100%;
+}
+
 body {
-	font-family: Arial, sans-serif;
-	text-align: center;
-	margin-top: 4rem;
+  background: var(--bg-dark);
+  color: var(--text-light);
+  font-family: var(--font-main);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  margin: 0;
+  padding-top: 4rem;
+  text-shadow: 0 0 4px rgba(255,255,255,0.15);
 }
+
+h1 {
+  font-size: 3rem;
+  margin-bottom: 3rem;
+  background: linear-gradient(90deg, var(--neon-pink), var(--neon-cyan));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  filter:
+    drop-shadow(0 0 6px var(--neon-pink))
+    drop-shadow(0 0 12px var(--neon-cyan));
+}
+
+/* --- stats panel --- */
 #stats {
-	font-size: 1.4rem;
-	margin-bottom: 2rem;
+  font-size: 1.5rem;
+  line-height: 1.6;
+  margin-bottom: 3rem;
+  padding: 1.75rem 2.75rem;
+  border: 2px solid var(--neon-cyan);
+  border-radius: 1.25rem;
+  background: rgba(255,255,255,0.03);
+  box-shadow:
+    0 0 10px var(--neon-cyan),
+    inset 0 0 6px var(--neon-cyan);
 }
+
+#stats p {
+  margin: 0.4rem 0;
+}
+
+#stats span {
+  font-weight: 700;
+  color: var(--neon-cyan);
+  text-shadow:
+    0 0 4px var(--neon-cyan),
+    0 0 8px var(--neon-cyan);
+}
+
+/* --- buttons --- */
 button {
-	font-size: 1rem;
-	padding: 0.6rem 1.2rem;
-	margin: 0 0.5rem;
+  background: transparent;
+  color: var(--text-light);
+  border: 2px solid var(--neon-pink);
+  padding: 0.8rem 1.8rem;
+  font-size: 1rem;
+  font-family: var(--font-main);
+  cursor: pointer;
+  border-radius: 0.6rem;
+  letter-spacing: 0.5px;
+  transition: box-shadow 0.25s, transform 0.25s;
+  box-shadow:
+    0 0 6px var(--neon-pink),
+    inset 0 0 6px var(--neon-pink);
 }
+
+button#stop {
+  border-color: var(--neon-cyan);
+  box-shadow:
+    0 0 6px var(--neon-cyan),
+    inset 0 0 6px var(--neon-cyan);
+}
+
+button:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow:
+    0 0 12px currentColor,
+    0 0 24px currentColor,
+    inset 0 0 12px currentColor;
+}
+
+button:active:not(:disabled) {
+  transform: translateY(0);
+  box-shadow:
+    0 0 8px currentColor,
+    inset 0 0 8px currentColor;
+}
+
+button:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+/* subtle neon flicker animation on stats digits */
+@keyframes flicker {
+  0%, 18%, 22%, 25%, 53%, 57%, 100% {
+    opacity: 1;
+  }
+  20%, 24%, 55% {
+    opacity: 0.4;
+  }
+}
+
+#stats span {
+  animation: flicker 3s infinite linear both;
+}
+
+/* Mobile-first layout tweaks */
+html,body { height:100%; margin:0; }
+body      { display:flex; flex-direction:column; justify-content:center; align-items:center; }
+
+/* Stats scale nicely on small screens */
+#stats p      { margin:.5rem 0; font-size:clamp(1.2rem, 4vw, 1.8rem); }
+#stats span   { margin-left:.5rem; }
+
+/* Buttons fill width under 500 px */
+@media (max-width:500px){
+  .buttons      { width:100%; display:grid; gap:1rem; grid-template-columns:1fr 1fr; }
+  button        { width:100%; }
+}
+

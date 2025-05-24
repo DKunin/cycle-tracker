@@ -1,22 +1,53 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="utf-8">
-  <title>Cycling Tracker</title>
-  <link rel="stylesheet" href="style.css">
-</head>
-<body>
-  <h1>Cycling Tracker</h1>
+  <head>
+    <meta charset="utf-8" />
+    <title>Cycling Tracker</title>
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="images/apple-touch-icon.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="images/favicon-32x32.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="images/favicon-16x16.png"
+    />
+    <link rel="mask-icon" href="images/safari-pinned-tab.svg" color="#5bbad5" />
+    <link rel="shortcut icon" href="images/favicon.ico" />
 
-  <div id="stats">
-    <p>Time      <span id="time">0:00</span></p>
-    <p>Distance  <span id="distance">0.00</span> km</p>
-    <p>Speed     <span id="speed">0.0</span> km/h</p>
-  </div>
+    <!-- Web App Manifest -->
+    <link rel="manifest" href="/site.webmanifest" />
 
-  <button id="start">Start</button>
-  <button id="stop"  disabled>Stop</button>
+    <!-- Windows Tile (Metro) -->
+    <meta name="msapplication-TileColor" content="#2d89ef" />
+    <meta name="msapplication-config" content="/browserconfig.xml" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 
-  <script src="script.js"></script>
-</body>
+  <!-- iOS full-screen & status-bar style -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <h1>Cycling Tracker</h1>
+
+    <div id="stats">
+      <p>Time <span id="time">0:00</span></p>
+      <p>Distance <span id="distance">0.00</span> km</p>
+      <p>Speed <span id="speed">0.0</span> km/h</p>
+    </div>
+
+    <button id="start">Start</button>
+    <button id="stop" disabled>Stop</button>
+
+    <script src="script.js"></script>
+  </body>
 </html>
