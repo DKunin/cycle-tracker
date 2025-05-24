@@ -1,0 +1,33 @@
+name: Deploy to Server
+
+on:
+  push:
+    branches:
+      - main 
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Deploy to Server
+        uses: appleboy/ssh-action@v0.1.10
+        with:
+          host: 62.217.190.139
+          username: dekunin
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script: |
+            cd /var/apps/cycle-tracker
+            ./deploy.sh
+      - name: Send Telegram Notification
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        run: |
+          curl -s -X POST "https://api.telegram.org/bot$TELEGRAM_BOT_TOKEN/sendMessage" \
+          -d "chat_id=$TELEGRAM_CHAT_ID" \
+          -d "text=🚀 *cycle-tracker deployment Successful!*%0A%0A✅ Repository: *${{ github.repository }}*%0A🔄 Branch: *${{ github.ref_name }}*%0A🔧 Commit: [${{ github.sha }}]($GITHUB_COMMIT_URL)%0A💡 Triggered by: *${{ github.actor }}*" \
+          -d "parse_mode=Markdown"
